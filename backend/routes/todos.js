@@ -30,7 +30,7 @@ router.put('/:id', async (req, res) => {
         const { title, completed } = req.body; // Extract `title` and `completed` fields from the request body
         const updatedTodo = await Todo.findByIdAndUpdate(
             req.params.id, // The ID of the Todo to update, extracted from the route parameter
-            { title, compeleted },
+            { title, completed },
             { new: true } // ensures the response contains the proper updated document 
 
         )
