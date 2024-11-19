@@ -1,9 +1,8 @@
-
 import axios from "axios";
+import React from 'react';
+import { useEffect, useState } from "react";
 import TodoItem from "./TodoItem";
 import TodoForm from "./TodoForm";
-import { Typography, Box, List } from "@mui/material";
-import { useEffect, useState } from "react";
 
 // TodoList component manages the list of todos and interactions with the backend
 const TodoList = () => {
@@ -25,37 +24,26 @@ const TodoList = () => {
   }, []);
 
   return (
-    <Box
-      sx={{
-        maxWidth: "600px",
-        margin: "0 auto",
-        padding: 2,
-        textAlign: "center",
-      }}
-    >
+    <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px", textAlign: "center" }}>
       {/* Header */}
-      <Typography variant="h4" gutterBottom>
-        Todo List
-      </Typography>
+      <h1>Todo List</h1>
 
       {/* Form to add new todos */}
       <TodoForm fetchTodos={fetchTodos} />
 
       {/* List of todos */}
-      <List
-        sx={{
-          marginTop: 2,
-          padding: 0,
-          border: "1px solid #ddd",
-          borderRadius: 2,
-          backgroundColor: "#f9f9f9",
-        }}
-      >
-        {todos.map((todo) => (
-          <TodoItem todo={todo} key={todo._id} fetchTodos={fetchTodos} />
-        ))}
-      </List>
-    </Box>
+      <ul style={{ marginTop: "20px", padding: 0, border: "1px solid #ddd", borderRadius: "8px", backgroundColor: "#f9f9f9" }}>
+        {todos.length > 0 ? (
+          todos.map((todo) => (
+            <li key={todo._id} style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
+              <TodoItem todo={todo} fetchTodos={fetchTodos} />
+            </li>
+          ))
+        ) : (
+          <p style={{ padding: "20px", color: "#888" }}>No todos available. Start by adding one!</p>
+        )}
+      </ul>
+    </div>
   );
 };
 

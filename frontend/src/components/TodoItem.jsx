@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import React from 'react';
 import {
   ListItem,
   Checkbox,
@@ -23,7 +24,7 @@ const TodoItem = ({ todo, fetchTodos }) => {
   const toggleComplete = async () => {
     try {
       await axios.put(`/api/todos/${todo._id}`, {
-        completed: !todo.completed,
+        completed: !todo?.completed,
       });
       fetchTodos();
     } catch (err) {
@@ -49,7 +50,7 @@ const TodoItem = ({ todo, fetchTodos }) => {
     try {
       await axios.put(`/api/todos/${todo._id}`, {
         title: newTitle,
-        completed: todo.completed,
+        completed: todo?.completed,
       });
       setIsEditing(false);
       fetchTodos();
@@ -70,7 +71,7 @@ const TodoItem = ({ todo, fetchTodos }) => {
     >
       {/* Checkbox to toggle completed status */}
       <Checkbox
-        checked={todo.completed}
+        checked={todo?.completed}
         onChange={toggleComplete}
         color="primary"
         inputProps={{ 'aria-label': 'Toggle complete' }}
@@ -97,7 +98,7 @@ const TodoItem = ({ todo, fetchTodos }) => {
           <IconButton
             onClick={() => {
               setIsEditing(false);
-              setNewTitle(todo.title); // Reset title if canceled
+              setNewTitle(todo?.title); // Reset title if canceled
             }}
             color="error"
           >
@@ -108,11 +109,11 @@ const TodoItem = ({ todo, fetchTodos }) => {
         <Typography
           sx={{
             flex: 1,
-            textDecoration: todo.completed ? 'line-through' : 'none',
-            color: todo.completed ? 'gray' : 'inherit',
+            textDecoration: todo?.completed ? 'line-through' : 'none',
+            color: todo?.completed ? 'gray' : 'inherit',
           }}
         >
-          {todo.title}
+          {todo?.title}
         </Typography>
       )}
 
