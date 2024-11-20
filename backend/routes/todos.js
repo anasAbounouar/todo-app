@@ -6,7 +6,7 @@ const Todo = require('../models/Todo')
 
 router.post('/', async (req, res) => {
     try {
-        const { title } = res.body
+        const { title } = req.body
         const newTodo = new Todo({ title }) // Create a new Todo document
         const savedTodo = await newTodo.save(); // Save the document to the database
         res.json(savedTodo) // Send the saved document as the response
